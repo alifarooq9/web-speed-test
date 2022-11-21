@@ -6,8 +6,8 @@ export const config = {
 };
 
 export default async function handler(req: NextRequest) {
-	const greetings = await redis.hvals("greeting");
-	console.log(greetings);
+	// const greetings = await redis.hvals("greeting");
+	// console.log(greetings);
 
 	return new Response(
 		JSON.stringify({
