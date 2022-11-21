@@ -3,8 +3,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import redis from "../../utils/redis";
 
 type Data = {
-	id: string;
-	greetings: string;
+	id?: string;
+	greetings?: string;
 	timeToFetch?: string;
 };
 
@@ -13,9 +13,10 @@ export default async function handler(
 	res: NextApiResponse<Data>
 ) {
 	const greetings = await redis.hvals("greeting");
+	console.log(greetings);
 
 	res.status(200).json({
-		id: JSON.parse(greetings[0]).id,
-		greetings: JSON.parse(greetings[0]).greetings + " " + "from lambda",
+		id: greetings[0].id,
+		greetings: greetings[0].greetings + " " + "from lambda",
 	});
 }

@@ -14,11 +14,10 @@ export default async function handler(
 ) {
 	const id = uuid();
 
-	const greetings = await redis.hset(
-		"greeting",
+	const greetings = await redis.hset("greeting", {
 		id,
-		JSON.stringify({ id, greetings: "Hello world" })
-	);
+		greetings: "Hello World",
+	});
 
 	res.status(200).json({ id: "", greetings: "" });
 }
