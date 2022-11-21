@@ -14,10 +14,7 @@ export default async function handler(
 ) {
 	const id = uuid();
 
-	const greetings = await redis.hset("greeting", {
-		id,
-		greetings: "Hello World",
-	});
+	// const greetings = await redis.sad("greeting");
 
 	res.status(200).json({ id: "", greetings: "" });
 }
