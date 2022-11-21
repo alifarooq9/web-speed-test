@@ -1,0 +1,21 @@
+// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import type { NextApiRequest, NextApiResponse } from "next";
+import redis from "../../utils/redis";
+
+type Data = {
+	id: string;
+	greetings: string;
+	timeToFetch?: string;
+};
+
+export default async function handler(
+	req: NextApiRequest,
+	res: NextApiResponse<Data>
+) {
+	const greetings = await redis.hvals("greeting");
+
+	res.status(200).json({
+		id: JSON.parse(greetings[0]).id,
+		greetings: JSON.parse(greetings[0]).greetings + " " + "from lambda",
+	});
+}
